@@ -7,12 +7,12 @@ console.log(text_by_line);
 let sum = 0;
 for (let i = 0; i < text_by_line.length; i++) {
     line = text_by_line[i];
-    combined_num = first_last_digits(line);
+    combined_num = first_last_numbers(line);
     sum += combined_num;
     console.log(sum);
 }
 
-function first_last_digits(line) {
+function first_last_numbers(line) {
     let first = true;
     let first_digit = 0;
     let last_digit = 0; 
@@ -34,3 +34,8 @@ function first_last_digits(line) {
     // console.log(new_number);
     return new_number;
 }
+
+// string_in_text= "19qdlpmdrxone7sevennine";
+// substring_one = "one";
+// index = string_in_text.indexOf(substring_one); 
+// console.log(index); 
