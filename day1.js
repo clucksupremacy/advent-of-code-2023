@@ -2,7 +2,6 @@ var fs = require("fs");
 var text = fs.readFileSync("day1input.txt");
 var text_to_string = text.toString();
 var text_by_line = text_to_string.split("\n")
-// console.log(text_by_line);
 
 let sum = 0;
 for (let i = 0; i < text_by_line.length; i++) {
@@ -11,7 +10,6 @@ for (let i = 0; i < text_by_line.length; i++) {
     combined_num = first_last_numbers(line);
     sum += combined_num;
     console.log(sum);
-    // console.log(line);
 }
 
 function first_last_numbers(line) {
@@ -27,37 +25,43 @@ function first_last_numbers(line) {
             }
             last_digit = char;
         }
-        // console.log(char);
     }
     let both_digits = first_digit + last_digit;
     new_number = Number(both_digits);
 
-    // console.log(first_digit);
-    // console.log(new_number);
     return new_number;
 }
 
 function convert_to_number(line) {
-    // let line = "xtwone3four";
-    // let line = "joneseven2sseven64chvczzn";
-    // let line = "five4tmeightkfdkhdfq34eight";
-    let substring_num = 
-        ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    let number_word_map =
+        {
+            "one" : 1, 
+            "two" : 2,
+            "three" : 3, 
+            "four" : 4, 
+            "five" : 5, 
+            "six" : 6, 
+            "seven" : 7,
+            "eight" : 8, 
+            "nine" : 9
+        };
 
     String.prototype.insertCharacter = function(index, replacement) {
-            return this.substring(0, index) + replacement + this.substring(index + replacement.length-1); 
+        return this.substring(0, index) + replacement + this.substring(index + replacement.length-1); 
     }
 
+    number_words = Object.keys(number_word_map);
     let i = 0;
-    while (i < substring_num.length) {
-        let index_in_string = line.indexOf(substring_num[i]);
+    while (i < number_words.length) {
+        let key = number_words[i];
+        let index_in_string = line.indexOf(key);
         while (index_in_string != -1) {
-            line = line.insertCharacter(index_in_string+(substring_num[i].length-1), (i+1).toString());
+            line = line.insertCharacter(index_in_string+(key.length-1), number_word_map[key].toString());
             console.log(line); 
-            index_in_string = line.indexOf(substring_num[i])
+            index_in_string = line.indexOf(key);
         }
         i++;
     }
-    
+
     return line;
 }
