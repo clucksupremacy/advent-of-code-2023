@@ -59,19 +59,6 @@
             return this.substring(0, index) + replacement + this.substring(index + replacement.length-1); 
     }
 
-    //reorder substring_num_2 in ascending order of index in string
-    for (let i = 0; i < substring_num_2.length; i++) {
-        let current_index = line.indexOf(substring_num_2[i]);
-        let prev_index = line.indexOf(substring_num_2[i-1]);
-        if (current_index < prev_index) {
-            let spliced_substring = substring_num_2.splice(i, 1)[0];
-            substring_num_2.unshift(spliced_substring);
-            // console.log(substring_num_2);
-        } else {
-            // console.log("ignore");
-        }
-    }
-
     for (let i = 0; i < substring_num_2.length; i++) {
         let index_in_string = line.indexOf(substring_num_2[i]);
         // console.log(index_in_string);
