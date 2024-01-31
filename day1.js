@@ -48,16 +48,16 @@ function convert_to_number(line) {
             return this.substring(0, index) + replacement + this.substring(index + replacement.length-1); 
     }
 
-    for (let i = 0; i < substring_num.length; i++) {
+    let i = 0;
+    while (i < substring_num.length) {
         let index_in_string = line.indexOf(substring_num[i]);
         while (index_in_string != -1) {
             line = line.insertCharacter(index_in_string+(substring_num[i].length-1), (i+1).toString());
             console.log(line); 
             index_in_string = line.indexOf(substring_num[i])
         }
-        
-        //let index_in_string = line.indexOf(substring_num[i]);
-        
+        i++;
     }
+    
     return line;
 }
