@@ -14,11 +14,43 @@ for (let i = 0; i < text_by_line.length; i++) {
 let arr_games = [];
 for (let i = 0; i < text_by_line.length; i++) {
     let line = text_by_line[i];
-    arr_games.push({ id: i+1, value: line });
-}
-console.log(arr_games);
 
-//
+    //delete the 'game ###' portion of each line
+    let new_line = line.slice(line.indexOf(":") + 2);
+    arr_games.push({ 
+                    id: i+1,
+                    value: new_line
+                });
+}
+// console.log(arr_games);
+
+//delete element from array arr_games if string contains a number greater than 14
+    //first, store number and color as individual elements in an array
+let arr_split = [];
+for (let i = 0; i < arr_games.length; i++) {
+    let str = arr_games[i].value;
+    let nums = str.split(' ');
+    arr_split.push({
+                    id: i+1,
+                    value: nums
+                });
+}
+    //second, convert numbers to number type
+for (let i = 0; i < arr_split.length; i++) {
+    // console.log(arr_split[i].value.length);
+    for (let j = 0; j < arr_split[i].value.length; i++) {
+        let arr_value = arr_split[i].value;
+        
+        if (typeof arr_value[j] === 'string' && !isNaN(arr_value[j])) {
+            arr_value.splice(j, 1, Number(j));
+        }
+    }
+    
+}
+
+console.log(arr_split);
+
+
 
 // let sum = 0;
 // for (let i = 0; i < text_by_line.length; i++) {
