@@ -35,21 +35,17 @@ for (let i = 0; i < arr_games.length; i++) {
                     value: nums
                 });
 }
-    //second, convert numbers to number type
+    //second, convert the number-strings in the array to number type
 for (let i = 0; i < arr_split.length; i++) {
-    // console.log(arr_split[i].value.length);
-    for (let j = 0; j < arr_split[i].value.length; i++) {
-        let arr_value = arr_split[i].value;
-        
+    let arr_value = arr_split[i].value;
+    
+    for (let j = 0; j < arr_value.length; j++) {
         if (typeof arr_value[j] === 'string' && !isNaN(arr_value[j])) {
-            arr_value.splice(j, 1, Number(j));
+            arr_value.splice(j, 1, Number(arr_value[j]));
         }
     }
-    
 }
-
 console.log(arr_split);
-
 
 
 // let sum = 0;
