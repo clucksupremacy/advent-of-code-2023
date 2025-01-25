@@ -53,5 +53,42 @@ for (let i = arr_split.length - 1; i >= 0; i--) {
       arr_split.splice(i, 1);
     }
   }
-console.log(arr_split);
+// console.log(arr_split);
 
+//delete elements from main array (arr_split at this point) if they don't meet the correct color-number combinations
+for (let i = arr_split.length - 1; i >= 0; i--) {
+    let arr_value = arr_split[i].value;
+
+    // if (arr_value.some((element) => ((element > 13) && (!arr_value[i + 2].includes("b"))))) {
+    //   arr_split.splice(i, 1);
+    // }
+
+    // for (let j = 0; j < arr_value.length; j++) {
+    //     if ()
+    // }
+
+    let check_blue_num = arr_value.findIndex((element) => element > 13);
+    let check_blue_word = arr_value[check_blue_num + 1];
+
+    if ((check_blue_num >= 0) && (typeof check_blue_word === "string")) {
+        if (check_blue_word.includes("blue") === false) {
+            arr_split.splice(i, 1);
+        }
+    }
+
+    // if (arr_value[check_blue_num + 1].includes("blue")) {
+    //     console.log("includes blue");
+    // }
+    // console.log(arr_value[check_blue_num+1].includes("blue"));
+
+
+    // let check_blue_word = arr_value[check_blue_num + 1];
+    // let check_blue_word = arr_value.findIndex((element) => element.include("blue"));
+    // console.log(check_blue_word);
+    // console.log(check_blue_word.indexOf("blue") !== -1);
+
+    // if ((check_blue_num) && (check_blue_word_string.indexOf("blue") !== -1)) {
+    //     arr_split.splice(i, 1);
+    // }
+  } 
+  console.log(arr_split);
