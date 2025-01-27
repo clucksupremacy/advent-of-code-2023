@@ -59,36 +59,142 @@ for (let i = arr_split.length - 1; i >= 0; i--) {
 for (let i = arr_split.length - 1; i >= 0; i--) {
     let arr_value = arr_split[i].value;
 
-    // if (arr_value.some((element) => ((element > 13) && (!arr_value[i + 2].includes("b"))))) {
-    //   arr_split.splice(i, 1);
-    // }
+    for (let j = 0; j < arr_value.length; j++) {
+        let arr_string = arr_value[j + 1];
 
-    // for (let j = 0; j < arr_value.length; j++) {
-    //     if ()
-    // }
+        if (!isNaN(arr_value[j]) && (arr_value[j] > 12)) {
+            if (arr_string.includes('red')) {
+                arr_split.splice(i, 1);
+            }
+        // if ((arr_value[j] === 14) && (typeof (arr_string) === "string")) {
+        //     if ((arr_string.includes("red")) || (arr_string.includes("green"))) {
+        //         arr_split.splice(i, 1);
+        //     }
+        // }
+    }
+  }
+}
+for (let i = arr_split.length - 1; i >= 0; i--) {
+    let arr_value = arr_split[i].value;
 
-    let check_blue_num = arr_value.findIndex((element) => element > 13);
-    let check_blue_word = arr_value[check_blue_num + 1];
+    for (let j = 0; j < arr_value.length; j++) {
+        let arr_string = arr_value[j + 1];
 
-    if ((check_blue_num >= 0) && (typeof check_blue_word === "string")) {
-        if (check_blue_word.includes("blue") === false) {
-            arr_split.splice(i, 1);
+        if (!isNaN(arr_value[j]) && (arr_value[j] > 13)) {
+            if (arr_string.includes('green')) {
+                arr_split.splice(i, 1);
+            }
         }
     }
+}
+//   console.log(arr_split);
 
-    // if (arr_value[check_blue_num + 1].includes("blue")) {
-    //     console.log("includes blue");
-    // }
-    // console.log(arr_value[check_blue_num+1].includes("blue"));
+//sum the id number values to get the total
+let sum = 0;
+
+for (let i = 0; i < arr_split.length; i++) {
+    let arr_id = arr_split[i].id;
+    // console.log(arr_id);
+    sum += arr_id;
+}
+
+console.log(sum);
 
 
-    // let check_blue_word = arr_value[check_blue_num + 1];
-    // let check_blue_word = arr_value.findIndex((element) => element.include("blue"));
-    // console.log(check_blue_word);
-    // console.log(check_blue_word.indexOf("blue") !== -1);
 
-    // if ((check_blue_num) && (check_blue_word_string.indexOf("blue") !== -1)) {
-    //     arr_split.splice(i, 1);
-    // }
-  } 
-  console.log(arr_split);
+
+
+// <-------------TESTS-------------->
+//     //third, delete element from array if contains a number greater than 14
+
+//     let fake_array = [
+//         {
+//             id: 1,
+//             value: [
+//               8, 'red,',   2, 'blue,',
+//               1, 'green;', 2, 'blue,'
+//             ]
+//           },
+//           {
+//             id: 2,
+//             value: [
+//               8, 'red,',   2, 'blue,',
+//               1, 'green;', 2, 'blue,'
+//             ]
+//           },
+//           {
+//             id: 3,
+//             value: [
+//               8, 'red,',   2, 'blue,',
+//               14, 'green;', 2, 'blue,'
+//             ]
+//           },
+//         //   {
+//         //     id: 4,
+//         //     value: [
+//         //       8, 'red,',   2, 'blue,',
+//         //       1, 'green;', 15, 'blue,'
+//         //     ]
+//         //   },
+//         {
+//             id: 5,
+//             value: [
+//               13, 'red,',   2, 'blue,',
+//               1, 'green;', 2, 'blue,'
+//             ]
+//           }
+
+//     ]
+//     for (let i = fake_array.length - 1; i >= 0; i--) {
+//         let arr_value = fake_array[i].value;
+    
+//         if (arr_value.some((element) => element > 14)) {
+//           fake_array.splice(i, 1);
+//         }
+//       }
+//     // console.log(fake_array);
+
+
+//     //delete elements from main array (arr_split at this point) if they don't meet the correct color-number combinations
+// for (let i = fake_array.length - 1; i >= 0; i--) {
+//     let arr_value = fake_array[i].value;
+
+//     for (let j = 0; j < arr_value.length; j++) {
+//         let arr_string = arr_value[j + 1];
+
+//         if (!isNaN(arr_value[j]) && (arr_value[j] > 12)) {
+//             if (arr_string.includes('red')) {
+//                 fake_array.splice(i, 1);
+//             }
+//         // if ((arr_value[j] === 14) && (typeof (arr_string) === "string")) {
+//         //     if ((arr_string.includes("red")) || (arr_string.includes("green"))) {
+//         //         fake_array.splice(i, 1);
+//         //     }
+//         // }
+//     }
+//   }
+// }
+// for (let i = fake_array.length - 1; i >= 0; i--) {
+//     let arr_value = fake_array[i].value;
+
+//     for (let j = 0; j < arr_value.length; j++) {
+//         let arr_string = arr_value[j + 1];
+
+//         if (!isNaN(arr_value[j]) && (arr_value[j] > 13)) {
+//             if (arr_string.includes('green')) {
+//                 fake_array.splice(i, 1);
+//             }
+//         }
+//     }
+// }
+
+// //sum the id number values to get the total
+// let sum = 0;
+
+// for (let i = 0; i < fake_array.length; i++) {
+//     let arr_id = fake_array[i].id;
+//     // console.log(arr_id);
+//     sum += arr_id;
+// }
+
+// console.log(sum);
