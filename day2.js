@@ -78,7 +78,53 @@ function sum_id(input) {
             sum += id;
         }
     }
-    return sum;
+    return [sum, arr_games];
 }
 
-console.log(sum_id(text_by_line));
+function sum_power(input) {
+    let [sum, arr_games] = sum_id(input);
+    let arr_top_three = [];
+    let sum_power = 0;
+
+    for (let i = 0; i < arr_games.length; i++) {
+        let value = arr_games[i].value;
+        let min_red, min_green, min_blue;
+
+        for (let j = 0; j < value.length; j++) {
+            let count = Number(value[j].count);
+            let color = value[j].color;
+
+            if ((color.includes('red')) && 
+                ((min_red === undefined) || (count > min_red))
+            ) {
+                min_red = count;
+            } else if ((color.includes('green')) && 
+                ((min_green === undefined) || (count > min_green))
+            ) {
+                min_green = count;
+            } else if ((color.includes('blue')) && 
+                ((min_blue === undefined) || (count > min_blue))
+            ) {
+                min_blue = count;
+            }
+        }
+
+        arr_top_three.push({
+                                id: i+1,
+                                min: [min_red, min_green, min_blue]
+                            })
+    }
+
+    for (let i = 0; i < arr_top_three.length; i++) {
+        let min = arr_top_three[i].min;
+
+        let power = min.reduce(
+            (accumulator, currentValue) => accumulator * currentValue, 1
+        );
+
+        sum_power += power;
+    }
+    return sum_power
+}
+
+console.log(sum_power(text_by_line));
