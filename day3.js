@@ -3,42 +3,6 @@ let text = fs.readFileSync("day3input.txt");
 let text_to_string = text.toString();
 let text_by_line = text_to_string.split("\n");
 
-/* 
-take input
-for each line, run the following checks:
-    see if there is a number touching a symbol (minus periods) in that particular line
-        if so, add that number to "sum"
-        if not, check the line before it for a symbol anywhere in the range of the same position plus or minus 1
-            add the number to "sum" if there is an adjacent symbol
-            if no match for the line before, check the line after.
-*/
-
-/* 
-[
-    {
-        line: 2,
-        parts: [
-            {
-                numbers: [
-                    {
-                        index: 7,
-                        number: 284,
-                    },
-                    ...
-                ], 
-                symbols: [
-                    {
-                        symbol: ...,
-                        index: 15
-                    }, 
-                    ...
-                ]
-            }
-        ],
-    },
-]
-*/
-
 function dict_engine(input) {
     let dict_engine = [];
 
@@ -83,9 +47,34 @@ function dict_engine(input) {
             },
         )
     }
-    console.log(dict_engine[1]);
+    // console.log(dict_engine[1]);
     // console.log(dict_engine.length);
-
+    return dict_engine;
 }
+// dict_engine(text_by_line);
 
-dict_engine(text_by_line);
+function sum_parts(input) {
+    let dict = dict_engine(input);
+    let sum = 0;
+    // console.log(dict[0], dict[1]);
+    // console.log(dict[dict.length - 1]);
+
+    for (let i = 0; i < dict.length; i++) {
+        let schem_num = dict[i].schematic_numbers;
+        let schem_sym = dict[i].schematic_symbols;
+        let schem_sym_prev = dict[i-1].schematic_symbols;
+        let schem_sym_next = dict[i+1].schematic_symbols;
+
+        for (let j = 0; j < schem_num.length; j++) {
+            let num_index = schem_num[j].index;
+            let num_length = schem_num[j].number.toString().length;
+            // console.log(num_index);
+            // console.log(num_length);
+            // console.log('check', schem_sym_prev);
+        
+            
+        }
+    }
+    console.log(sum);
+}
+sum_parts(text_by_line);
