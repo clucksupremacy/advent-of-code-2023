@@ -65,6 +65,16 @@ function sum_parts(input) {
         let schem_sym_prev = dict[i-1].schematic_symbols;
         let schem_sym_next = dict[i+1].schematic_symbols;
 
+        function in_range(arr, index) {
+            return index >= 0 && index < arr.length;
+        }
+
+        let dict_range = in_range(dict, i);
+
+        if (!dict_range) {
+            console.log("HOL' UP"); 
+        }
+
         for (let j = 0; j < schem_num.length; j++) {
             let num_index = schem_num[j].index;
             let num_length = schem_num[j].number.toString().length;
@@ -75,6 +85,5 @@ function sum_parts(input) {
             
         }
     }
-    console.log(sum);
 }
 sum_parts(text_by_line);
