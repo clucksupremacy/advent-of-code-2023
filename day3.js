@@ -68,10 +68,10 @@ function check_fraction(input) {
             }
         }
     }
-    console.log(dict[77]);
-    console.log(dict[130]);
+    // console.log(dict[77]);
+    // console.log(dict[130]);
 }
-check_fraction(text_by_line);
+// check_fraction(text_by_line);
 
 function sum_parts(input) {
     let dict = dict_engine(input);
@@ -193,16 +193,16 @@ function sum_parts(input) {
 
             if (        //check if there is a symbol adjacent to number in the same row...
                     (schem_sym.some((elem) => 
-                    (elem.index >= (num_index - 1)) && 
-                    (elem.index <= (num_index + num_length + 1))
+                        (elem.index >= (num_index - 1)) && 
+                        (elem.index <= (num_index + num_length))
                 )) ||   //...in previous row...
                     ((i > 0) && (schem_sym_prev.some((elem) => 
-                    (elem.index >= (num_index - 1)) && 
-                    (elem.index <= (num_index + num_length + 1))
+                        (elem.index >= (num_index - 1)) && 
+                        (elem.index <= (num_index + num_length))
                 ))) ||  //...or in the final row...
                     ((i < dict.length-1) && (schem_sym_next.some((elem) => 
-                    (elem.index >= (num_index - 1)) && 
-                    (elem.index <= (num_index + num_length + 1))
+                        (elem.index >= (num_index - 1)) && 
+                        (elem.index <= (num_index + num_length))
                 )))
             ) {
                 sum += num;
@@ -213,5 +213,6 @@ function sum_parts(input) {
     console.log(sum);
 }
 
-// sum_parts(text_by_line);
+sum_parts(text_by_line);
 //527438 is too high
+//521515 is correct
