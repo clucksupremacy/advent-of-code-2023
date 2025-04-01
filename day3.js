@@ -52,8 +52,6 @@ function dict_engine(input) {
             },
         )
     }
-    // console.log(dict_engine[1]);
-    // console.log(dict_engine.length);
     return dict_engine;
 }
 // dict_engine(text_by_line);
@@ -68,117 +66,12 @@ function check_fraction(input) {
             }
         }
     }
-    // console.log(dict[77]);
-    // console.log(dict[130]);
 }
 // check_fraction(text_by_line);
 
 function sum_parts(input) {
     let dict = dict_engine(input);
-    // let dict = [{
-    //     line: 1,
-    //     schematic_numbers: [
-    //       { number: 830, index: 12 },
-    //       { number: 743, index: 17 },
-    //       { number: 59, index: 27 },
-    //       { number: 955, index: 31 },
-    //       { number: 663, index: 41 },
-    //       { number: 367, index: 86 },
-    //       { number: 895, index: 100 },
-    //       { number: 899, index: 107 },
-    //       { number: 826, index: 125 },
-    //       { number: 220, index: 131 }
-    //     ],
-    //     schematic_symbols: []
-    //   }, {
-    //     line: 2,
-    //     schematic_numbers: [
-    //       { number: 284, index: 7 },
-    //       { number: 377, index: 48 },
-    //       { number: 419, index: 77 },
-    //       { number: 488, index: 93 },
-    //       { number: 939, index: 135 }
-    //     ],
-    //     schematic_symbols: [
-    //       { symbol: '*', index: 15 },
-    //       { symbol: '*', index: 28 },
-    //       { symbol: '$', index: 34 },
-    //       { symbol: '+', index: 38 },
-    //       { symbol: '*', index: 44 },
-    //       { symbol: '*', index: 69 },
-    //       { symbol: '*', index: 99 },
-    //       { symbol: '*', index: 107 },
-    //       { symbol: '*', index: 127 },
-    //       { symbol: '-', index: 130 }
-    //     ]
-    //   }, {
-    //     line: 3,
-    //     schematic_numbers: [
-    //       { number: 976, index: 14 },
-    //       { number: 679, index: 19 },
-    //       { number: 461, index: 23 },
-    //       { number: 7, index: 27 },
-    //       { number: 350, index: 38 },
-    //       { number: 33, index: 43 },
-    //       { number: 380, index: 56 },
-    //       { number: 151, index: 66 },
-    //       { number: 897, index: 70 },
-    //       { number: 295, index: 83 },
-    //       { number: 105, index: 100 },
-    //       { number: 418, index: 108 },
-    //       { number: 481, index: 124 }
-    //     ],
-    //     schematic_symbols: [
-    //       { symbol: '%', index: 4 },
-    //       { symbol: '$', index: 54 },
-    //       { symbol: '$', index: 62 },
-    //       { symbol: '#', index: 88 },
-    //       { symbol: '*', index: 95 },
-    //       { symbol: '&', index: 135 }
-    //     ]
-    //   }, {
-    //     line: 4,
-    //     schematic_numbers: [
-    //       { number: 992, index: 3 },
-    //       { number: 701, index: 33 },
-    //       { number: 508, index: 52 },
-    //       { number: 578, index: 61 },
-    //       { number: 259, index: 88 },
-    //       { number: 331, index: 94 },
-    //       { number: 795, index: 114 },
-    //       { number: 945, index: 119 },
-    //       { number: 79, index: 130 }
-    //     ],
-    //     schematic_symbols: [
-    //       { symbol: '#', index: 11 },
-    //       { symbol: '=', index: 18 },
-    //       { symbol: '/', index: 24 },
-    //       { symbol: '*', index: 58 }
-    //     ]
-    //   }, {
-    //     line: 5,
-    //     schematic_numbers: [
-    //       { number: 868, index: 9 },
-    //       { number: 17, index: 66 },
-    //       { number: 348, index: 79 },
-    //       { number: 441, index: 98 },
-    //       { number: 852, index: 102 },
-    //       { number: 922, index: 137 }
-    //     ],
-    //     schematic_symbols: [
-    //       { symbol: '*', index: 36 },
-    //       { symbol: '*', index: 68 },
-    //       { symbol: '*', index: 101 },
-    //       { symbol: '*', index: 113 },
-    //       { symbol: '-', index: 119 },
-    //       { symbol: '@', index: 131 }
-    //     ]
-    //   }];
-    
     let sum = 0;
-    // console.log(dict[0], dict[1], dict[2], dict[3], dict[4]);
-    // console.log(dict[17]);
-    // console.log(dict[dict.length - 1]);
 
     for (let i = 0; i < dict.length; i++) {
         let schem_num = dict[i].schematic_numbers;
@@ -212,7 +105,87 @@ function sum_parts(input) {
     }
     console.log(sum);
 }
-
-sum_parts(text_by_line);
+// sum_parts(text_by_line);
 //527438 is too high
 //521515 is correct
+
+function sum_gears(input) {
+    let dict = dict_engine(input);
+    let sum = 0;
+
+    // looping through each "line" in main array
+    for (let i = 0; i < dict.length; i++) {
+        let schem_sym = dict[i].schematic_symbols;
+        let schem_num = dict[i].schematic_numbers;
+        let schem_num_prev = i > 0 ? dict[i-1].schematic_numbers : undefined;
+        let schem_num_next = i < dict.length-1 ? dict[i+1].schematic_numbers : undefined;
+
+        // looping through "schematic_symbols" in each line
+        for (let j = 0; j < schem_sym.length; j++) {
+            let sym = schem_sym[j].symbol;
+            let sym_index = schem_sym[j].index;
+            let array = [];
+
+            function isNumber(x) {
+                return (x >= 0 && x <= 9);
+            }
+
+            function indexInRange(start, end, number) {
+                let inRange = false;
+                for (let i = start; i <= end; i++) {
+                  if (i === number) {
+                    inRange = true;
+                    break;
+                  }
+                }
+                return inRange;
+            }
+
+            // looping through each element (symbol) in each "schematic_symbols"
+            if (sym === '*') {
+                // check for adjacent numbers from "schematic_numbers" in the same line...
+                for (let k = 0; k < schem_num.length; k++) {
+                    let num_obj = schem_num[k];
+                    let num_length = schem_num[k].number.toString().length;
+
+                    if (((num_obj.index + (num_length-1)) === (sym_index-1)) || 
+                        (num_obj.index === (sym_index+1))) {
+                            array.push(num_obj.number);
+                    }
+                }
+
+                // ...check for adjacent numbers from "schematic_numbers" in the previous line...
+                for (let l = 0; l < schem_num_prev.length; l++) {
+                    let num_obj = schem_num_prev[l];
+                    let num_length = schem_num_prev[l].number.toString().length;
+
+                    if (((num_obj.index + (num_length-1)) === (sym_index-1)) ||
+                        (indexInRange(num_obj.index, num_obj.index + num_length-1, sym_index)) ||
+                        (num_obj.index === (sym_index+1))) {
+                            array.push(num_obj.number);
+                    }
+                }
+
+                // ...check for adjacent numbers from "schematic_numbers" in the next line...
+                if (schem_num_next !== undefined) {
+                    for (let m = 0; m < schem_num_next.length; m++) {
+                    let num_obj = schem_num_next[m];
+                    let num_length = schem_num_next[m].number.toString().length;
+
+                    if (((num_obj.index + (num_length-1)) === (sym_index-1)) ||
+                        (indexInRange(num_obj.index, num_obj.index + num_length-1, sym_index)) ||
+                        (num_obj.index === (sym_index+1))) {
+                            array.push(num_obj.number);
+                    }
+                }}
+            }
+            // console.log("line", i+1, "adjacent numbers", array);
+            if (array.length === 2) {
+                let gear_ratio = array[0] * array[1];
+                sum += gear_ratio;
+            }
+        }
+    }
+    console.log(sum);
+}
+sum_gears(text_by_line);
